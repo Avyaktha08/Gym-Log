@@ -1,4 +1,8 @@
-const exercises=[];
+let exercises=JSON.parse(localStorage.getItem('exercises'));
+
+if (exercises===null){
+        exercises=[];
+    }
 
 function addExercise(){
     const inputEle = document.querySelector('.inputElement');
@@ -23,19 +27,31 @@ function addExercise(){
     weightEle.value = "";
     repsEle.value="";
     setsEle.value="";
+    const stringified= JSON.stringify(exercises);
+    localStorage.setItem('exercises',stringified);
 }
 
 let html='';
 let exerciseObject='';
 
 function display(){
-    exercises.forEach((value)=>{exerciseObject=value});
-    htmlCode=`<p>${exerciseObject.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    html = '';
+    exercises.forEach((value,i)=>{exerciseObject=value;
+            htmlCode=`<p>${exerciseObject.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Weight: ${exerciseObject.weight} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Reps: ${exerciseObject.reps} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        Sets:${exerciseObject.sets}</p>`
+        Sets:${exerciseObject.sets} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="deleteButton" onclick="deleteButton(${i})">DELETE</button></p>`
     html += htmlCode;
+    });
     document.querySelector('.display').innerHTML=`${html}`;
+}
+
+function deleteButton(i){
+    exercises.splice(i,1);
+    const stringified= JSON.stringify(exercises);
+    localStorage.setItem('exercises',stringified);
+    display();
 }
 
 const addButton=document.querySelector('.addButton')
