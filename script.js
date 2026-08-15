@@ -17,18 +17,31 @@ function addExercise(){
     const setsEle = document.querySelector('.setsElement');
     let sets = setsEle.value;
 
-    exercises.push(
-        {name : exerciseName,
-        weight : weight,
-        reps: reps,
-        sets: sets});
+    const dateElement=document.querySelector('.dateElement');
+    let date= dateElement.value;
 
-    inputEle.value = "";
-    weightEle.value = "";
-    repsEle.value="";
-    setsEle.value="";
-    const stringified= JSON.stringify(exercises);
-    localStorage.setItem('exercises',stringified);
+    if (exerciseName===""){document.querySelector('.goodJob').innerHTML="No Exercise Named";
+            setTimeout (() => {document.querySelector('.goodJob').innerHTML=""},2000);
+    }
+    else {document.querySelector('.goodJob').innerHTML="Good Job";
+            setTimeout (() => {document.querySelector('.goodJob').innerHTML=""},2000);
+
+        exercises.push(
+            {name : exerciseName,
+            weight : weight,
+            reps: reps,
+            sets: sets,
+            date: date});
+        display(); 
+
+        inputEle.value = "";
+        weightEle.value = "";
+        repsEle.value="";
+        setsEle.value="";
+        dateElement.value="";
+        const stringified= JSON.stringify(exercises);
+        localStorage.setItem('exercises',stringified);    
+        };
 }
 
 let html='';
@@ -40,7 +53,8 @@ function display(){
             htmlCode=`<p>${exerciseObject.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Weight: ${exerciseObject.weight} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Reps: ${exerciseObject.reps} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        Sets:${exerciseObject.sets} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Sets: ${exerciseObject.sets} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        date:&nbsp;&nbsp;${exerciseObject.date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="deleteButton" onclick="deleteButton(${i})">DELETE</button></p>`
     html += htmlCode;
     });
@@ -57,5 +71,4 @@ function deleteButton(i){
 const addButton=document.querySelector('.addButton')
 addButton.addEventListener('click',()=>{
     addExercise();
-    display();
 });
