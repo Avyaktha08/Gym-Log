@@ -20,11 +20,15 @@ function addExercise(){
     const dateElement=document.querySelector('.dateElement');
     let date= dateElement.value;
 
-    if (exerciseName===""){document.querySelector('.goodJob').innerHTML="No Exercise Selected";
-            setTimeout (() => {document.querySelector('.goodJob').innerHTML=""},2000);
+    const message = document.querySelector('.goodJob');
+
+    if (exerciseName===""){message.innerHTML="No Exercise Selected";
+        message.style.color = "red";
+            setTimeout (() => {message.innerHTML=""},2000);
     }
-    else {document.querySelector('.goodJob').innerHTML="Good Job";
-            setTimeout (() => {document.querySelector('.goodJob').innerHTML=""},2000);
+    else {message.innerHTML="Good Job";
+        message.style.color = "limegreen";
+            setTimeout (() => {message.innerHTML=""},2000);
 
         exercises.push(
             {name : exerciseName,
@@ -51,7 +55,7 @@ function display(){
     html = '';
     exercises.forEach((value,i)=>{exerciseObject=value;
             htmlCode=`<p>${exerciseObject.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        Weight: ${exerciseObject.weight} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        Weight: ${exerciseObject.weight} kg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Reps: ${exerciseObject.reps} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Sets: ${exerciseObject.sets} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         date:&nbsp;&nbsp;${exerciseObject.date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
