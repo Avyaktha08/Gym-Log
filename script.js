@@ -20,7 +20,7 @@ function addExercise(){
     const dateElement=document.querySelector('.dateElement');
     let date= dateElement.value;
 
-    if (exerciseName===""){document.querySelector('.goodJob').innerHTML="No Exercise Named";
+    if (exerciseName===""){document.querySelector('.goodJob').innerHTML="No Exercise Selected";
             setTimeout (() => {document.querySelector('.goodJob').innerHTML=""},2000);
     }
     else {document.querySelector('.goodJob').innerHTML="Good Job";
